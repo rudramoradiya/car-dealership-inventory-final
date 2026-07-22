@@ -102,3 +102,40 @@ export async function purchaseVehicle(req, res) {
     return res.status(400).json({ message: error.message });
   }
 }
+
+export async function restockVehicle(req, res) {
+  const { amount } = req.body;
+
+  if (amount === undefined || amount === null || amount === '') {
+    return res.status(400).json({ message: 'Restock amount is required' });
+  }
+
+  const restockAmount = Number(amount);
+
+  if (!Number.isInteger(restockAmount) || restockAmount <= 0) {
+    return res.status(400).json({ message: 'Restock amount must be a positive integer' });
+  }
+
+  try {
+    const vehicle = await Vehicle.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { quantity: restockAmount } },
+      { new: true, runValidators: true }
+    );
+
+    if (!vehicle) {
+      return res.status(404).json({ message: 'Vehicle not found' });
+    }
+
+    return res.status(200).json({
+      message: 'Vehicle restocked successfully',
+      vehicle: vehicle.toJSON(),
+    });
+  } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: 'Invalid vehicle ID' });
+    }
+
+    return res.status(400).json({ message: error.message });
+  }
+}
