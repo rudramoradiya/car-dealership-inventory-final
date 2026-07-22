@@ -53,3 +53,21 @@ export async function updateVehicle(req, res) {
     return res.status(400).json({ message: error.message });
   }
 }
+
+export async function deleteVehicle(req, res) {
+  try {
+    const vehicle = await Vehicle.findByIdAndDelete(req.params.id);
+
+    if (!vehicle) {
+      return res.status(404).json({ message: 'Vehicle not found' });
+    }
+
+    return res.status(200).json({ message: 'Vehicle deleted successfully' });
+  } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: 'Invalid vehicle ID' });
+    }
+
+    return res.status(400).json({ message: error.message });
+  }
+}
