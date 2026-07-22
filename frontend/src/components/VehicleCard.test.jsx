@@ -60,4 +60,38 @@ describe('VehicleCard', () => {
 
     expect(mockOnPurchase).toHaveBeenCalledWith(sampleVehicle);
   });
+
+  it('renders admin action buttons when user is admin', () => {
+    useAuth.mockReturnValue({ isAuthenticated: true, user: { role: 'admin' }, isAdmin: true });
+    const mockEdit = vi.fn();
+    const mockDelete = vi.fn();
+    const mockRestock = vi.fn();
+
+    render(
+      <VehicleCard
+        vehicle={sampleVehicle}
+        onPurchase={vi.fn()}
+        onEdit={mockEdit}
+        onDelete={mockDelete}
+        onRestock={mockRestock}
+      />
+    );
+
+    const editBtn = screen.getByRole('button', { name: /edit/i });
+    const deleteBtn = screen.getByRole('button', { name: /delete/i });
+    const restockBtn = screen.getByRole('button', { name: /restock/i });
+
+    expect(editBtn).toBeInTheDocument();
+    expect(deleteBtn).toBeInTheDocument();
+    expect(restockBtn).toBeInTheDocument();
+
+    fireEvent.click(editBtn);
+    expect(mockEdit).toHaveBeenCalledWith(sampleVehicle);
+
+    fireEvent.click(deleteBtn);
+    expect(mockDelete).toHaveBeenCalledWith(sampleVehicle);
+
+    fireEvent.click(restockBtn);
+    expect(mockRestock).toHaveBeenCalledWith(sampleVehicle);
+  });
 });
