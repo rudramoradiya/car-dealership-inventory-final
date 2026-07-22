@@ -42,3 +42,7 @@ export async function login(req, res) {
 
   return res.status(200).json({ token, user: user.toJSON() });
 }
+
+export function getMe(req, res) {
+  return res.status(200).json({ user: req.user.toJSON() });
+}
