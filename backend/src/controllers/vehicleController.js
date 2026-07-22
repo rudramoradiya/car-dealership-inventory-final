@@ -32,3 +32,24 @@ export async function searchVehicles(req, res) {
   const vehicles = await Vehicle.find(filter).sort({ createdAt: -1 });
   return res.status(200).json({ vehicles });
 }
+
+export async function updateVehicle(req, res) {
+  try {
+    const vehicle = await Vehicle.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!vehicle) {
+      return res.status(404).json({ message: 'Vehicle not found' });
+    }
+
+    return res.status(200).json({ vehicle: vehicle.toJSON() });
+  } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: 'Invalid vehicle ID' });
+    }
+
+    return res.status(400).json({ message: error.message });
+  }
+}
