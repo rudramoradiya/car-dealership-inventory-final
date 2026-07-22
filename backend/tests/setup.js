@@ -1,6 +1,8 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 
+process.env.JWT_SECRET = 'test-jwt-secret';
+
 let mongoServer;
 
 beforeAll(async () => {
