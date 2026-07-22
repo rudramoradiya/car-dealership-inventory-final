@@ -1,4 +1,5 @@
 import Vehicle from '../models/Vehicle.js';
+import { buildVehicleSearchFilter } from '../utils/vehicleSearch.js';
 
 const REQUIRED_FIELDS = ['make', 'model', 'category', 'year', 'price', 'quantity'];
 
@@ -23,5 +24,11 @@ export async function createVehicle(req, res) {
 
 export async function listVehicles(_req, res) {
   const vehicles = await Vehicle.find().sort({ createdAt: -1 });
+  return res.status(200).json({ vehicles });
+}
+
+export async function searchVehicles(req, res) {
+  const filter = buildVehicleSearchFilter(req.query);
+  const vehicles = await Vehicle.find(filter).sort({ createdAt: -1 });
   return res.status(200).json({ vehicles });
 }
