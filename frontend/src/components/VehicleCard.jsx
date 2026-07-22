@@ -1,7 +1,7 @@
 import { useAuth } from '../context/AuthContext.jsx';
 
-export function VehicleCard({ vehicle, onPurchase }) {
-  const { isAuthenticated } = useAuth();
+export function VehicleCard({ vehicle, onPurchase, onEdit, onDelete, onRestock }) {
+  const { isAuthenticated, isAdmin } = useAuth();
   const { make, model, year, price, quantity, category, vin } = vehicle;
 
   const isOutOfStock = quantity === 0;
@@ -51,7 +51,7 @@ export function VehicleCard({ vehicle, onPurchase }) {
         </div>
       </div>
 
-      <div className="px-6 pb-6 pt-2 bg-slate-800/50 border-t border-slate-700/50">
+      <div className="px-6 pb-6 pt-2 bg-slate-800/50 border-t border-slate-700/50 space-y-3">
         <button
           onClick={() => onPurchase && onPurchase(vehicle)}
           disabled={isOutOfStock || !isAuthenticated}
@@ -69,6 +69,29 @@ export function VehicleCard({ vehicle, onPurchase }) {
             ? 'Login to Purchase'
             : 'Purchase'}
         </button>
+
+        {isAdmin && (
+          <div className="flex items-center justify-between space-x-2 pt-2 border-t border-slate-700/60">
+            <button
+              onClick={() => onEdit && onEdit(vehicle)}
+              className="flex-1 py-1.5 px-3 text-xs font-medium text-amber-300 hover:text-amber-200 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 rounded-md transition-colors text-center"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => onRestock && onRestock(vehicle)}
+              className="flex-1 py-1.5 px-3 text-xs font-medium text-emerald-300 hover:text-emerald-200 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 rounded-md transition-colors text-center"
+            >
+              Restock
+            </button>
+            <button
+              onClick={() => onDelete && onDelete(vehicle)}
+              className="flex-1 py-1.5 px-3 text-xs font-medium text-red-400 hover:text-red-300 bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 rounded-md transition-colors text-center"
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
