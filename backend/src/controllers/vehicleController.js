@@ -71,3 +71,34 @@ export async function deleteVehicle(req, res) {
     return res.status(400).json({ message: error.message });
   }
 }
+
+export async function purchaseVehicle(req, res) {
+  try {
+    const vehicle = await Vehicle.findOneAndUpdate(
+      { _id: req.params.id, quantity: { $gt: 0 } },
+      { $inc: { quantity: -1 } },
+      { new: true }
+    );
+
+    if (vehicle) {
+      return res.status(200).json({
+        message: 'Purchase successful',
+        vehicle: vehicle.toJSON(),
+      });
+    }
+
+    const existing = await Vehicle.findById(req.params.id);
+
+    if (!existing) {
+      return res.status(404).json({ message: 'Vehicle not found' });
+    }
+
+    return res.status(400).json({ message: 'Vehicle is out of stock' });
+  } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(400).json({ message: 'Invalid vehicle ID' });
+    }
+
+    return res.status(400).json({ message: error.message });
+  }
+}
