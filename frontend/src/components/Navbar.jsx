@@ -27,9 +27,13 @@ export function Navbar() {
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm font-medium text-slate-300">{user?.email}</span>
-                  {isAdmin && (
+                  {isAdmin ? (
                     <span className="px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full">
                       Admin
+                    </span>
+                  ) : (
+                    <span className="px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full">
+                      User
                     </span>
                   )}
                 </div>

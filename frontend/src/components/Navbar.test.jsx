@@ -42,7 +42,8 @@ describe('Navbar', () => {
     );
 
     expect(screen.getByText('user@dealership.com')).toBeInTheDocument();
-    expect(screen.queryByText(/admin/i)).not.toBeInTheDocument();
+    expect(screen.getByText('User')).toBeInTheDocument();
+    expect(screen.queryByText('Admin')).not.toBeInTheDocument();
     const logoutBtn = screen.getByRole('button', { name: /logout/i });
     expect(logoutBtn).toBeInTheDocument();
 
