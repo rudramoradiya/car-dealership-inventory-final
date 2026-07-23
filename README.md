@@ -9,8 +9,7 @@ Built using **Test-Driven Development (TDD)** with comprehensive backend and fro
 ## 🚀 Live Demo
 
 🌐 **Application:**  
-👉 https://your-demo-url.com
-
+👉 https://car-dealership-inventory-final.vercel.app
 > Replace the link above with your deployed application.
 
 ---
@@ -36,10 +35,8 @@ Built using **Test-Driven Development (TDD)** with comprehensive backend and fro
 
 <p>
   <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white"/>
-  <img src="https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript&logoColor=white"/>
   <img src="https://img.shields.io/badge/Node.js-Backend-339933?logo=node.js&logoColor=white"/>
   <img src="https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb&logoColor=white"/>
-  <img src="https://img.shields.io/badge/AI-Google%20Gemini-4285F4?logo=google-gemini&logoColor=white"/>
   <img src="https://img.shields.io/badge/License-MIT-purple"/>
 </p>
 
@@ -291,37 +288,21 @@ npm run test:watch
 
 # 📸 Screenshots
 
-> Save your screenshots inside the `screenshots/` folder.
-
-### 🔑 Login
-
-```md
+### 🔑 Login Page
 ![Login](screenshots/login.png)
-```
 
-### 📊 Dashboard
-
-```md
+### 📊 Dashboard Catalog
 ![Dashboard](screenshots/dashboard.png)
-```
 
-### 👨‍💼 Admin Dashboard
-
-```md
+### 👨‍💼 Admin Management Controls
 ![Admin Dashboard](screenshots/admin-dashboard.png)
-```
 
-### 🔍 Vehicle Search
-
-```md
+### 🔍 Multi-Parameter Vehicle Search & Filter
 ![Search](screenshots/search.png)
-```
 
-### 🛒 Purchase Flow
-
-```md
+### 🛒 One-Click Purchase & Real-Time Stock Tracking
 ![Purchase](screenshots/purchase.png)
-```
+
 
 ---
 
