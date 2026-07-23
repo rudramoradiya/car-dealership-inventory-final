@@ -135,72 +135,95 @@ export function DashboardPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="w-full px-4 sm:px-6 py-6 space-y-6 text-slate-100">
       <Toast
         message={toastConfig.message}
         type={toastConfig.type}
         onClose={() => setToastConfig({ message: null, type: 'success' })}
       />
 
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight">Vehicle Inventory</h1>
-          <p className="mt-1 text-slate-400">Explore available dealership inventory in real time</p>
+      {/* Main Content Layout (Sidebar + Inventory Grid) */}
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
+        
+        {/* Left Sidebar Filter Column */}
+        <div className="w-full lg:w-72 xl:w-80 shrink-0">
+          <VehicleSearchFilter onSearch={handleSearch} onReset={handleReset} />
         </div>
 
-        {isAdmin && (
-          <button
-            onClick={handleOpenAddModal}
-            className="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm rounded-xl shadow-lg transition-all hover:scale-105"
-          >
-            <span className="mr-2 text-lg">+</span> Add Vehicle
-          </button>
-        )}
+        {/* Right Main Vehicle Section */}
+        <div className="flex-1 w-full space-y-6">
+          
+          {/* Sub-Header Control Bar */}
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-slate-900 border border-slate-800 p-4 rounded-2xl shadow-xl">
+            <div>
+              <h1 className="text-xl font-black text-white tracking-tight">
+                Showing {vehicles.length} Vehicles
+              </h1>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Explore available dealership inventory in real time
+              </p>
+            </div>
+
+            {/* Admin Add Vehicle Button */}
+            {isAdmin && (
+              <div>
+                <button
+                  onClick={handleOpenAddModal}
+                  className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-lg shadow-blue-600/25 transition-all"
+                >
+                  <span className="mr-1 text-sm font-bold">+</span> Add Vehicle
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Global Error Banner */}
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/30 text-red-300 p-4 rounded-2xl text-xs shadow-lg">
+              {error}
+            </div>
+          )}
+
+          {/* Catalog Grid State: Loading, Empty, or Vehicle Cards */}
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" aria-label="Loading vehicles">
+              <span className="sr-only">Loading vehicles...</span>
+              {Array.from({ length: 8 }).map((_, i) => (
+                <SkeletonCard key={i} />
+              ))}
+            </div>
+          ) : vehicles.length === 0 ? (
+            <div className="text-center py-16 bg-slate-900/90 rounded-2xl border border-slate-800 space-y-4 shadow-xl">
+              <div className="text-5xl">🚗</div>
+              <p className="text-lg font-extrabold text-white">No vehicles found</p>
+              <p className="text-xs text-slate-400 max-w-sm mx-auto">
+                We couldn't find any vehicles matching your current search parameters.
+              </p>
+              <button
+                onClick={handleReset}
+                className="px-4 py-2 text-xs font-semibold text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 rounded-xl transition-all"
+              >
+                Reset Filters
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {vehicles.map((vehicle) => (
+                <VehicleCard
+                  key={vehicle._id}
+                  vehicle={vehicle}
+                  onPurchase={handlePurchase}
+                  onEdit={handleOpenEditModal}
+                  onDelete={handleDeleteVehicle}
+                  onRestock={handleOpenRestockModal}
+                />
+              ))}
+            </div>
+          )}
+
+        </div>
+
       </div>
-
-      <VehicleSearchFilter onSearch={handleSearch} onReset={handleReset} />
-
-      {error && (
-        <div className="bg-red-900/40 border border-red-500/50 text-red-200 p-4 rounded-xl text-sm">
-          {error}
-        </div>
-      )}
-
-      {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Loading vehicles">
-          <span className="sr-only">Loading vehicles...</span>
-          {Array.from({ length: 6 }).map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
-        </div>
-      ) : vehicles.length === 0 ? (
-        <div className="text-center py-16 bg-slate-800/50 rounded-2xl border border-slate-700/50 space-y-4">
-          <div className="text-4xl">🚗</div>
-          <p className="text-lg font-semibold text-slate-200">No vehicles found</p>
-          <p className="text-sm text-slate-400 max-w-sm mx-auto">
-            We couldn't find any vehicles matching your current search parameters.
-          </p>
-          <button
-            onClick={handleReset}
-            className="px-4 py-2 text-sm font-medium text-blue-400 hover:text-blue-300 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 rounded-lg transition-colors"
-          >
-            Reset Filters
-          </button>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {vehicles.map((vehicle) => (
-            <VehicleCard
-              key={vehicle._id}
-              vehicle={vehicle}
-              onPurchase={handlePurchase}
-              onEdit={handleOpenEditModal}
-              onDelete={handleDeleteVehicle}
-              onRestock={handleOpenRestockModal}
-            />
-          ))}
-        </div>
-      )}
 
       {/* Admin Modals */}
       <VehicleFormModal

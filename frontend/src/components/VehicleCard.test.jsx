@@ -24,7 +24,7 @@ describe('VehicleCard', () => {
 
     expect(screen.getByText(/Toyota Camry/i)).toBeInTheDocument();
     expect(screen.getByText(/2022/i)).toBeInTheDocument();
-    expect(screen.getByText(/\$25,000|\$25000/i)).toBeInTheDocument();
+    expect(screen.getByText(/₹25,000|\$25,000|\$25000/i)).toBeInTheDocument();
     expect(screen.getByText(/3 in stock/i)).toBeInTheDocument();
   });
 

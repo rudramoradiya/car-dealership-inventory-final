@@ -15,17 +15,17 @@ export function Toast({ message, type = 'success', onClose, duration = 3000 }) {
 
   return (
     <div
-      className={`fixed top-20 right-6 z-50 flex items-center space-x-3 px-5 py-3.5 rounded-xl shadow-2xl border text-sm font-medium transition-all transform animate-bounce ${
+      className={`fixed top-20 right-6 z-50 flex items-center space-x-3 px-5 py-3.5 rounded-2xl shadow-2xl border text-xs font-semibold backdrop-blur-md transition-all transform animate-fade-in ${
         isError
-          ? 'bg-red-900/90 border-red-500/80 text-red-100 shadow-red-900/40'
-          : 'bg-emerald-900/90 border-emerald-500/80 text-emerald-100 shadow-emerald-900/40'
+          ? 'bg-red-950/90 border-red-500/80 text-red-100 shadow-red-950/40'
+          : 'bg-emerald-950/90 border-emerald-500/80 text-emerald-100 shadow-emerald-950/40'
       }`}
     >
-      <span>{isError ? '⚠️' : '✅'}</span>
+      <span className="text-base">{isError ? '⚠️' : '✅'}</span>
       <span>{message}</span>
       <button
         onClick={onClose}
-        className="ml-3 text-xs opacity-70 hover:opacity-100 transition-opacity"
+        className="ml-3 text-xs opacity-70 hover:opacity-100 transition-opacity p-0.5"
       >
         ✕
       </button>

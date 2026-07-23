@@ -13,7 +13,6 @@ describe('VehicleFormModal', () => {
     expect(screen.getByLabelText(/price/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/quantity/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/category/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/vin/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /save|create/i })).toBeInTheDocument();
   });
 
@@ -26,7 +25,6 @@ describe('VehicleFormModal', () => {
       price: 35000,
       quantity: 5,
       category: 'coupe',
-      vin: 'FORD12345',
     };
 
     render(
@@ -56,7 +54,6 @@ describe('VehicleFormModal', () => {
     fireEvent.change(screen.getByLabelText(/price/i), { target: { value: '65000' } });
     fireEvent.change(screen.getByLabelText(/quantity/i), { target: { value: '2' } });
     fireEvent.change(screen.getByLabelText(/category/i), { target: { value: 'coupe' } });
-    fireEvent.change(screen.getByLabelText(/vin/i), { target: { value: 'CHEV12345' } });
 
     fireEvent.click(screen.getByRole('button', { name: /save|create/i }));
 
@@ -68,7 +65,6 @@ describe('VehicleFormModal', () => {
         price: 65000,
         quantity: 2,
         category: 'coupe',
-        vin: 'CHEV12345',
       });
     });
   });
