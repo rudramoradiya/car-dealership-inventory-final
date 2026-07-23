@@ -61,6 +61,16 @@ describe('VehicleCard', () => {
     expect(mockOnPurchase).toHaveBeenCalledWith(sampleVehicle);
   });
 
+  it('hides admin action buttons (Edit, Delete, Restock) for standard user role', () => {
+    useAuth.mockReturnValue({ isAuthenticated: true, user: { role: 'user' }, isAdmin: false });
+
+    render(<VehicleCard vehicle={sampleVehicle} onPurchase={vi.fn()} />);
+
+    expect(screen.queryByRole('button', { name: /edit/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /delete/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /restock/i })).not.toBeInTheDocument();
+  });
+
   it('renders admin action buttons when user is admin', () => {
     useAuth.mockReturnValue({ isAuthenticated: true, user: { role: 'admin' }, isAdmin: true });
     const mockEdit = vi.fn();

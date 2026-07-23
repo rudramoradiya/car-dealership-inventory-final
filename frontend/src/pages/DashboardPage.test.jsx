@@ -42,6 +42,28 @@ describe('DashboardPage', () => {
     expect(vehiclesApi.listVehicles).toHaveBeenCalledTimes(1);
   });
 
+  it('hides Add Vehicle button for standard user role', async () => {
+    useAuth.mockReturnValue({
+      token: 'user-token',
+      isAuthenticated: true,
+      user: { email: 'user@example.com', role: 'user' },
+      isAdmin: false,
+    });
+    vehiclesApi.listVehicles.mockResolvedValueOnce({ vehicles: sampleVehicles });
+
+    render(
+      <MemoryRouter>
+        <DashboardPage />
+      </MemoryRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/Ford Mustang/i)).toBeInTheDocument();
+    });
+
+    expect(screen.queryByRole('button', { name: /\+ Add Vehicle/i })).not.toBeInTheDocument();
+  });
+
   it('filters vehicles when search filter is applied', async () => {
     vehiclesApi.listVehicles.mockResolvedValueOnce({ vehicles: sampleVehicles });
     vehiclesApi.searchVehicles.mockResolvedValueOnce({ vehicles: [sampleVehicles[0]] });
