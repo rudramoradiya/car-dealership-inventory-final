@@ -1,93 +1,168 @@
-# Car Dealership Inventory System
+# 🚗 Car Dealership Inventory System
 
-A production-ready, full-stack vehicle inventory and dealership management web application featuring role-based access control (RBAC), vehicle search and multi-parameter filtering, real-time inventory updates (restock/purchase flows), and responsive UI designed with Tailwind CSS.
+> 🚀 A production-ready full-stack vehicle inventory management system with secure authentication, role-based access control, real-time inventory management, advanced search & filtering, and a modern responsive UI.
 
-Built with **Test-Driven Development (TDD)** using **Jest + Supertest** for the Express backend and **Vitest + React Testing Library** for the React frontend.
-
----
-
-## Features
-
-- **Authentication & Authorization**: Secure JWT-based auth with hashed passwords (`bcrypt`). Role-based access control supporting `customer` and `admin` roles.
-- **Vehicle Catalog & Search**: Instant multi-field filtering by Make, Model, Category, and Price Range (Min/Max).
-- **Admin Inventory Control**:
-  - Full CRUD capabilities for adding, updating, and deleting vehicles.
-  - One-click stock replenishment modal for restocking out-of-stock items.
-- **Customer Purchase Flow**: Authenticated customers can purchase vehicles in real time with instant inventory decrement and stock tracking.
-- **Modern UI / UX**: Dynamic notification toast alerts, modal forms, skeleton loading states, and dark/light styled aesthetics.
+Built using **Test-Driven Development (TDD)** with comprehensive backend and frontend testing.
 
 ---
 
-## Tech Stack
+## 🚀 Live Demo
 
-| Layer | Technologies |
-| :--- | :--- |
-| **Backend** | Node.js (ES Modules), Express.js, MongoDB, Mongoose ORM, JSON Web Tokens (`jsonwebtoken`), `bcrypt` |
-| **Frontend** | React 18, Vite, React Router v7, Tailwind CSS, Lucide React icons |
-| **Backend Testing** | Jest, Supertest, MongoDB Memory Server (`mongodb-memory-server`) |
-| **Frontend Testing** | Vitest, React Testing Library, jsdom, `@testing-library/jest-dom` |
+🌐 **Application:**  
+👉 https://your-demo-url.com
+
+> Replace the link above with your deployed application.
 
 ---
 
-## Project Structure
+## 📚 Table of Contents
 
-```
+- 🚀 Live Demo
+- ✨ Features
+- 🛠️ Tech Stack
+- 📂 Project Structure
+- ⚙️ Prerequisites
+- 🔐 Environment Variables
+- 🚀 Installation
+- 📡 API Endpoints
+- 🧪 Testing
+- 📸 Screenshots
+- 🤖 AI Usage
+- 📄 License
+
+---
+
+# 🛠️ Tech Stack
+
+<p>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white"/>
+  <img src="https://img.shields.io/badge/TypeScript-Ready-3178C6?logo=typescript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Node.js-Backend-339933?logo=node.js&logoColor=white"/>
+  <img src="https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AI-Google%20Gemini-4285F4?logo=google-gemini&logoColor=white"/>
+  <img src="https://img.shields.io/badge/License-MIT-purple"/>
+</p>
+
+### ⚙️ Backend
+
+- 🟢 Node.js
+- 🚂 Express.js
+- 🍃 MongoDB
+- 📦 Mongoose
+- 🔐 JSON Web Tokens (JWT)
+- 🔑 bcrypt
+
+### 🎨 Frontend
+
+- ⚛️ React 19
+- ⚡ Vite
+- 🧭 React Router v7
+- 💨 Tailwind CSS
+- 🎯 Lucide React
+
+### 🧪 Testing
+
+#### Backend
+
+- ✅ Jest
+- ✅ Supertest
+- ✅ MongoDB Memory Server
+
+#### Frontend
+
+- ✅ Vitest
+- ✅ React Testing Library
+- ✅ jsdom
+- ✅ @testing-library/jest-dom
+
+---
+
+# ✨ Features
+
+## 🔐 Authentication & Authorization
+
+- ✅ JWT Authentication
+- 🔒 Secure Password Hashing (bcrypt)
+- 👥 Role-Based Access Control (RBAC)
+- 👤 Customer & Admin Roles
+
+---
+
+## 🚗 Vehicle Inventory
+
+- 📋 Browse all vehicles
+- 🔎 Advanced multi-field search
+- 🏷️ Filter by Make
+- 🚘 Filter by Model
+- 📂 Filter by Category
+- 💰 Filter by Price Range
+
+---
+
+## 👨‍💼 Admin Dashboard
+
+- ➕ Add Vehicles
+- ✏️ Update Vehicles
+- 🗑️ Delete Vehicles
+- 📦 Restock Inventory
+- 📊 Manage Stock Levels
+
+---
+
+## 🛒 Customer Features
+
+- 🚙 Purchase Vehicles
+- ⚡ Real-Time Inventory Updates
+- 📉 Automatic Stock Tracking
+
+---
+
+## 🎨 Modern UI/UX
+
+- 📱 Responsive Design
+- 💨 Tailwind CSS
+- 🔔 Toast Notifications
+- ⏳ Skeleton Loading
+- 🪟 Modal Forms
+
+---
+
+# 📂 Project Structure
+
+```text
 .
 ├── backend/
-│   ├── src/
-│   │   ├── config/          # Database connection (db.js)
-│   │   ├── controllers/     # Auth and Vehicle request handlers
-│   │   ├── middleware/      # Auth & role checking middleware
-│   │   ├── models/          # Mongoose schemas (User, Vehicle)
-│   │   ├── routes/          # Express route definitions
-│   │   ├── utils/           # JWT generation & search helper logic
-│   │   ├── app.js           # Express app setup
-│   │   └── server.js        # Server entry point
-│   ├── tests/               # 11 Jest test suites (60 tests)
-│   └── package.json
 ├── frontend/
-│   ├── src/
-│   │   ├── api/             # Fetch client & API service layer
-│   │   ├── components/      # React components (Navbar, Modals, Vehicle Cards, Toast)
-│   │   ├── context/         # React Auth Context & Provider
-│   │   ├── pages/           # Views (LoginPage, RegisterPage, DashboardPage)
-│   │   ├── App.jsx          # App router setup
-│   │   └── main.jsx         # Entry point
-│   └── package.json
-├── PROMPTS.md               # AI development interaction log
-└── README.md                # Project documentation & coverage report
+├── PROMPTS.md
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-## Prerequisites
+# ⚙️ Prerequisites
 
-- **Node.js**: `v18.0.0` or higher
-- **npm**: `v9.0.0` or higher
-- **MongoDB**: Local MongoDB server or MongoDB Atlas connection URI (for running backend dev server)
+Before running the project, make sure you have:
+
+- 🟢 Node.js v18+
+- 📦 npm v9+
+- 🍃 MongoDB (Local or Atlas)
 
 ---
 
-## Environment Variables
+# 🔐 Environment Variables
 
-### Backend Configuration (`backend/.env`)
-
-Create a `.env` file inside the `backend/` directory:
+## Backend (`backend/.env`)
 
 ```env
-# MongoDB Connection String
 MONGODB_URI=mongodb://localhost:27017/car-dealership
 
-# Secret Key for JWT Signing
 JWT_SECRET=your-super-secret-jwt-key
 
-# Server Port (Default: 5000)
 PORT=5000
 ```
 
-### Frontend Configuration (`frontend/.env` - Optional)
-
-By default, Vite proxies requests to `http://localhost:5000`. You can configure a custom API endpoint in `frontend/.env`:
+## Frontend (`frontend/.env`)
 
 ```env
 VITE_API_URL=http://localhost:5000
@@ -95,159 +170,207 @@ VITE_API_URL=http://localhost:5000
 
 ---
 
-## Getting Started
+# 🚀 Installation
 
-### 1. Backend Setup
+## 📥 Clone Repository
+
+```bash
+git clone <repository-url>
+
+cd car-dealership-inventory-system
+```
+
+---
+
+## ⚙️ Backend
 
 ```bash
 cd backend
 
-# Install dependencies
 npm install
 
-# Start development server with live reload
 npm run dev
+```
 
-# Start production server
+Production
+
+```bash
 npm start
 ```
 
-### 2. Frontend Setup
+---
+
+## 🎨 Frontend
 
 ```bash
 cd frontend
 
-# Install dependencies
 npm install
 
-# Start Vite dev server (defaults to http://localhost:5173)
 npm run dev
+```
 
-# Build for production
+Production Build
+
+```bash
 npm run build
 ```
 
 ---
 
-## API Endpoints
+# 📡 API Endpoints
 
-### Auth Endpoints
+## 🔐 Authentication
 
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/register` | Public | Register a new user (`customer` or `admin`). |
-| `POST` | `/api/auth/login` | Public | Authenticate user & return JWT token. |
-| `GET` | `/api/auth/me` | Authenticated | Get current authenticated user profile. |
-
-### Vehicle Endpoints
-
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/vehicles` | Public | List all vehicles in inventory. |
-| `GET` | `/api/vehicles/search` | Public | Filter vehicles by make, model, category, and price range. |
-| `POST` | `/api/vehicles` | Admin | Create a new vehicle record. |
-| `PUT` | `/api/vehicles/:id` | Admin | Update vehicle details (price, make, model, stock, etc.). |
-| `DELETE` | `/api/vehicles/:id` | Admin | Delete a vehicle from inventory. |
-| `POST` | `/api/vehicles/:id/purchase` | Authenticated | Purchase 1 unit of a vehicle (decrements stock). |
-| `POST` | `/api/vehicles/:id/restock` | Admin | Restock vehicle inventory (increments stock). |
-
-### System Health
-
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/health` | Public | API health check endpoint. |
+| Method | Endpoint | Access |
+|---------|----------|--------|
+| POST | `/api/auth/register` | 🌍 Public |
+| POST | `/api/auth/login` | 🌍 Public |
+| GET | `/api/auth/me` | 🔒 Authenticated |
 
 ---
 
-## Test Execution & Coverage Reports
+## 🚗 Vehicles
 
-Both backend and frontend codebases have unit and integration test coverage.
+| Method | Endpoint | Access |
+|---------|----------|--------|
+| GET | `/api/vehicles` | 🌍 Public |
+| GET | `/api/vehicles/search` | 🌍 Public |
+| POST | `/api/vehicles` | 👨‍💼 Admin |
+| PUT | `/api/vehicles/:id` | 👨‍💼 Admin |
+| DELETE | `/api/vehicles/:id` | 👨‍💼 Admin |
+| POST | `/api/vehicles/:id/purchase` | 👤 Customer |
+| POST | `/api/vehicles/:id/restock` | 👨‍💼 Admin |
 
-### Running Backend Tests (Jest + Supertest)
+---
+
+## ❤️ Health Check
+
+| Method | Endpoint |
+|---------|----------|
+| GET | `/api/health` |
+
+---
+
+# 🧪 Testing
+
+## 🔙 Backend
 
 ```bash
 cd backend
 
-# Run all test suites
 npm test
 
-# Run tests with code coverage stats
 npm run test:coverage
 ```
 
-#### Backend Coverage Summary
+### ✅ Results
 
-- **Test Suites**: 11 passed, 11 total
-- **Total Tests**: 60 passed, 60 total
-
-```
------------------------|---------|----------|---------|---------|-------------------
-File                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
------------------------|---------|----------|---------|---------|-------------------
-All files              |   92.41 |    89.18 |    90.9 |   92.41 |                   
- src                   |     100 |      100 |     100 |     100 |                   
-  app.js               |     100 |      100 |     100 |     100 |                   
- src/controllers       |   93.67 |    93.75 |     100 |   93.67 |                   
-  authController.js    |   95.83 |      100 |     100 |   95.83 | 25                
-  vehicleController.js |   92.72 |    90.62 |     100 |   92.72 | 21,71,102,139     
- src/middleware        |     100 |      100 |     100 |     100 |                   
-  authMiddleware.js    |     100 |      100 |     100 |     100 |                   
- src/models            |   91.66 |       50 |     100 |   91.66 |                   
-  User.js              |      90 |       50 |     100 |      90 | 38                
-  Vehicle.js           |     100 |      100 |     100 |     100 |                   
- src/routes            |     100 |      100 |     100 |     100 |                   
-  authRoutes.js        |     100 |      100 |     100 |     100 |                   
-  healthRoutes.js      |     100 |      100 |     100 |     100 |                   
-  vehicleRoutes.js     |     100 |      100 |     100 |     100 |                   
- src/utils             |     100 |      100 |     100 |     100 |                   
-  jwt.js               |     100 |      100 |     100 |     100 |                   
-  vehicleSearch.js     |     100 |      100 |     100 |     100 |                   
------------------------|---------|----------|---------|---------|-------------------
-```
+- 🟢 11 Test Suites Passed
+- 🟢 60 Tests Passed
+- 📊 92.41% Coverage
 
 ---
 
-### Running Frontend Tests (Vitest + RTL)
+## 🎨 Frontend
 
 ```bash
 cd frontend
 
-# Run all Vitest suites
 npm test
 
-# Run Vitest in watch mode
 npm run test:watch
 ```
 
-#### Frontend Test Summary
+### ✅ Results
 
-- **Test Suites**: 16 passed, 16 total
-- **Total Tests**: 58 passed, 58 total
+- 🟢 16 Test Suites Passed
+- 🟢 58 Tests Passed
 
+---
+
+# 📸 Screenshots
+
+> Save your screenshots inside the `screenshots/` folder.
+
+### 🔑 Login
+
+```md
+![Login](screenshots/login.png)
 ```
- ✓ src/context/AuthContext.test.jsx (6 tests)
- ✓ src/components/ProtectedRoute.test.jsx (5 tests)
- ✓ src/components/VehicleCard.test.jsx (6 tests)
- ✓ src/api/vehicles.test.js (7 tests)
- ✓ src/pages/RegisterPage.test.jsx (4 tests)
- ✓ src/pages/DashboardPage.test.jsx (4 tests)
- ✓ src/components/VehicleFormModal.test.jsx (3 tests)
- ✓ src/api/client.test.js (4 tests)
- ✓ src/pages/LoginPage.test.jsx (3 tests)
- ✓ src/api/auth.test.js (3 tests)
- ✓ src/components/Navbar.test.jsx (3 tests)
- ✓ src/components/VehicleSearchFilter.test.jsx (3 tests)
- ✓ src/components/Toast.test.jsx (3 tests)
- ✓ src/components/RestockModal.test.jsx (2 tests)
- ✓ src/App.test.jsx (1 test)
- ✓ src/components/SkeletonCard.test.jsx (1 test)
 
- Test Files: 16 passed (16)
- Tests:      58 passed (58)
+### 📊 Dashboard
+
+```md
+![Dashboard](screenshots/dashboard.png)
+```
+
+### 👨‍💼 Admin Dashboard
+
+```md
+![Admin Dashboard](screenshots/admin-dashboard.png)
+```
+
+### 🔍 Vehicle Search
+
+```md
+![Search](screenshots/search.png)
+```
+
+### 🛒 Purchase Flow
+
+```md
+![Purchase](screenshots/purchase.png)
 ```
 
 ---
 
-## License
+# 🤖 AI Usage
 
-This project is licensed under the [MIT License](LICENSE).
+This project was developed with assistance from **Google Gemini AI** for:
+
+- 💡 Brainstorming
+- 🐞 Debugging
+- 📝 Documentation
+- 🧪 Test Development
+- ⚙️ Code Improvements
+- 🚀 Development Support
+
+📄 **Complete AI prompt history is available in:**
+
+```text
+PROMPTS.md
+```
+
+Please review **PROMPTS.md** for the full record of AI-assisted development used throughout this project.
+
+---
+
+# 📈 Test Coverage
+
+### Backend
+
+- ✅ 11 Test Suites
+- ✅ 60 Tests
+- 📊 92.41% Coverage
+
+### Frontend
+
+- ✅ 16 Test Suites
+- ✅ 58 Tests Passed
+
+---
+
+# 📄 License
+
+📜 This project is licensed under the **MIT License**.
+
+See the **LICENSE** file for more details.
+
+---
+
+## ⭐ If you found this project helpful...
+
+Give it a ⭐ on GitHub!
+
+Happy Coding! 🚀
