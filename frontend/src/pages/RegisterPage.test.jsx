@@ -42,7 +42,7 @@ describe('RegisterPage', () => {
     expect(screen.getByRole('button', { name: /register|sign up/i })).toBeInTheDocument();
   });
 
-  it('submits form with user input and auto-logins / redirects on success', async () => {
+  it('submits form with user email and password', async () => {
     mockRegister.mockResolvedValueOnce();
     mockLogin.mockResolvedValueOnce();
 
@@ -81,5 +81,22 @@ describe('RegisterPage', () => {
     await waitFor(() => {
       expect(screen.getByText(/email already registered/i)).toBeInTheDocument();
     });
+  });
+
+  it('displays validation error when password length is less than 6 characters', async () => {
+    render(
+      <MemoryRouter>
+        <RegisterPage />
+      </MemoryRouter>
+    );
+
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
+    fireEvent.change(screen.getByLabelText(/^password/i), { target: { value: 'test1' } });
+    fireEvent.click(screen.getByRole('button', { name: /register|sign up/i }));
+
+    await waitFor(() => {
+      expect(screen.getAllByText(/password must be at least 6 characters long/i).length).toBeGreaterThan(0);
+    });
+    expect(mockRegister).not.toHaveBeenCalled();
   });
 });

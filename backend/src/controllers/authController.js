@@ -2,7 +2,7 @@ import User from '../models/User.js';
 import { signToken } from '../utils/jwt.js';
 
 export async function register(req, res) {
-  const { email, password, role } = req.body;
+  const { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
@@ -19,7 +19,7 @@ export async function register(req, res) {
   }
 
   try {
-    const user = await User.create({ email, password, role });
+    const user = await User.create({ email, password });
     return res.status(201).json({ user: user.toJSON() });
   } catch (error) {
     return res.status(400).json({ message: error.message });

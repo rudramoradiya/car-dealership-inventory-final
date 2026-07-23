@@ -14,6 +14,12 @@ export function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormError('');
+
+    if (password.length < 6) {
+      setFormError('Password must be at least 6 characters long');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -78,10 +84,12 @@ export function RegisterPage() {
                   type="password"
                   autoComplete="new-password"
                   required
+                  minLength={6}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-slate-600 rounded-md shadow-sm bg-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"
                 />
+                <p className="mt-1 text-xs text-slate-400">Password must be at least 6 characters long</p>
               </div>
             </div>
 
