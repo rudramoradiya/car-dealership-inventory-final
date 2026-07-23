@@ -2,10 +2,14 @@ import User from '../models/User.js';
 import { signToken } from '../utils/jwt.js';
 
 export async function register(req, res) {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
   if (!email || !password) {
     return res.status(400).json({ message: 'Email and password are required' });
+  }
+
+  if (password.length < 6) {
+    return res.status(400).json({ message: 'Password must be at least 6 characters long' });
   }
 
   const existingUser = await User.findOne({ email: email.toLowerCase() });
@@ -14,9 +18,12 @@ export async function register(req, res) {
     return res.status(409).json({ message: 'Email already registered' });
   }
 
-  const user = await User.create({ email, password });
-
-  return res.status(201).json({ user: user.toJSON() });
+  try {
+    const user = await User.create({ email, password, role });
+    return res.status(201).json({ user: user.toJSON() });
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
 }
 
 export async function login(req, res) {

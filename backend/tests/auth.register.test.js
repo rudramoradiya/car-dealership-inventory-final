@@ -50,4 +50,13 @@ describe('POST /api/auth/register', () => {
     expect(response.status).toBe(400);
     expect(response.body.message).toBeDefined();
   });
+
+  it('should return 400 when password length is less than 6 characters', async () => {
+    const response = await request(app)
+      .post('/api/auth/register')
+      .send({ email: 'shortpw@example.com', password: 'test1' });
+
+    expect(response.status).toBe(400);
+    expect(response.body.message).toMatch(/password must be at least 6 characters/i);
+  });
 });
