@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { apiRequest } from './client.js';
+import { apiRequest, API_BASE } from './client.js';
 
 describe('apiRequest', () => {
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe('apiRequest', () => {
 
     const data = await apiRequest('/health');
 
-    expect(fetch).toHaveBeenCalledWith('/api/health', {
+    expect(fetch).toHaveBeenCalledWith(`${API_BASE}/health`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
       body: undefined,
@@ -30,7 +30,7 @@ describe('apiRequest', () => {
 
     await apiRequest('/auth/me', { token: 'test-token' });
 
-    expect(fetch).toHaveBeenCalledWith('/api/auth/me', {
+    expect(fetch).toHaveBeenCalledWith(`${API_BASE}/auth/me`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ describe('apiRequest', () => {
       body: { email: 'a@b.com', password: 'secret' },
     });
 
-    expect(fetch).toHaveBeenCalledWith('/api/auth/login', {
+    expect(fetch).toHaveBeenCalledWith(`${API_BASE}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: 'a@b.com', password: 'secret' }),
